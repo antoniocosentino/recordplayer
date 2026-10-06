@@ -10,6 +10,7 @@
 # Server-specific settings and temporary diagnostics
 /backend/settings.php
 /backend/check.php
+/DEPLOYMENT.local.md
 .env
 .env.*
 !.env.example

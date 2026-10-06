@@ -2,6 +2,8 @@
 
 A small, dependency-free album player for FTP hosting. Album selection uses `?albumId=your-album-id`. Supports cover artwork, playlists, English/Italian biographies, member credits, links, light/dark themes, and device media controls. No database or external fonts.
 
+The current deployment uses PHP mode. The header contains only language and theme controls, with no home navigation. Album covers display as uncropped squares. PHP catalog loading, playback, and seeking have been verified on the deployment host.
+
 ## Code and private content
 
 This repository contains application code and fictional examples only. The following stay on your machine and are excluded from Git:
@@ -11,6 +13,7 @@ This repository contains application code and fictional examples only. The follo
 - `backend/settings.php`: private server paths
 - `backend/check.php`: temporary setup diagnostic
 - `dist/`: deployment output, which can contain private settings
+- `DEPLOYMENT.local.md`: optional private handoff with actual deployment paths
 
 Do not force-add ignored files. Git ignore rules do not remove files already committed. Before your first commit, review `git status --short` and `git diff --cached`. Back up private content separately; Git does not back it up.
 
@@ -69,3 +72,36 @@ Path masking hides the underlying filename and storage path. It does not prevent
 ### Static mode
 
 Set the static catalog URL, then build. The output includes real JSON and audio for direct public hosting. These files are still excluded from Git because the entire build directory is ignored.
+
+## Picking this up later
+
+A fresh Git clone contains no real albums, audio, covers, or server settings. Restore `assets/`, `content/albums.json`, and `backend/settings.php` from your separate private backup before building the real player. Also back up `DEPLOYMENT.local.md` if you use it; it records deployment-specific details without publishing them.
+
+The example JSON is a template only: it does not include playable audio or cover files. Provide your own assets to preview it. Running `npm test` on a code-only clone works without real content; the local asset check is skipped.
+
+### Update the interface
+
+1. Edit `index.html`, `styles.css`, or `app.js`.
+2. Run `npm test` and `npm run build`.
+3. Upload the changed frontend files from `dist/` to the existing public player folder. For a full upload, preserve the PHP settings and check the configured catalog endpoint first.
+4. Hard-refresh your browser if old styling or behavior remains cached.
+
+Do not upload the repository root: upload build output. Never put real MP3s or the private catalog back in the public folder when using PHP mode.
+
+### Update or add an album in PHP mode
+
+1. Edit your local `content/albums.json`; add the album under its chosen URL ID and use unique track IDs within that album.
+2. Place new MP3s and cover artwork in the corresponding local `assets/` folder. Set each track's duration in seconds.
+3. Upload the updated JSON to the private catalog location configured in `backend/settings.php`.
+4. Upload new MP3s beneath the private media root, preserving the paths from the JSON. Upload covers beneath the public frontend's `assets/` folder.
+5. Open `?albumId=your-album-id` and verify playback and seeking.
+
+Content-only edits do not require a frontend build. Committing code does not upload any changes to the FTP server; these are separate steps.
+
+### Troubleshooting
+
+- **Catalog unavailable:** verify the absolute catalog path, filename, PHP read permissions, and valid JSON. `media_root` is the parent beneath which paths such as `assets/demo-one/track-1.mp3` exist.
+- **Catalog works but audio fails:** verify each track path under the private media root and PHP read permissions. The public streaming endpoint must remain reachable.
+- **Local preview cannot load the catalog:** the Node server cannot run PHP. Temporarily select static mode in `config.js`, and restore PHP mode before building for the PHP host.
+- **Missing files on a fresh clone:** restore your private backup or follow the example setup; ignored files are deliberately absent from GitHub.
+- **Old direct MP3 links still work:** deleting MP3s from the new player does not remove copies hosted by older sites. Manage those copies separately.
