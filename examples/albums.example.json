@@ -1,0 +1,72 @@
+{
+  "defaultAlbum": "demo-one",
+  "albums": {
+    "demo-one": {
+      "id": "demo-one",
+      "artist": "Example Band 1",
+      "title": "Example EP",
+      "year": 2020,
+      "type": "EP",
+      "accent": "#4fbe85",
+      "cover": "assets/demo-one/cover.jpg",
+      "bio": {
+        "en": [
+          "An example biography."
+        ],
+        "it": [
+          "Una biografia di esempio."
+        ]
+      },
+      "members": [
+        {
+          "name": "Example Musician",
+          "roles": "Vocals, Guitar"
+        }
+      ],
+      "links": [
+        {
+          "label": "Website",
+          "url": "https://example.com/"
+        }
+      ],
+      "tracks": [
+        {
+          "id": "t01",
+          "title": "Example Track 1",
+          "src": "assets/demo-one/track-1.mp3",
+          "duration": 180
+        },
+        {
+          "id": "t02",
+          "title": "Example Track 2",
+          "src": "assets/demo-one/track-2.mp3",
+          "duration": 190
+        },
+        {
+          "id": "t03",
+          "title": "Example Track 3",
+          "src": "assets/demo-one/track-3.mp3",
+          "duration": 200
+        },
+        {
+          "id": "t04",
+          "title": "Example Track 4",
+          "src": "assets/demo-one/track-4.mp3",
+          "duration": 210
+        },
+        {
+          "id": "t05",
+          "title": "Example Track 5",
+          "src": "assets/demo-one/track-5.mp3",
+          "duration": 220
+        },
+        {
+          "id": "t06",
+          "title": "Example Track 6",
+          "src": "assets/demo-one/track-6.mp3",
+          "duration": 230
+        }
+      ]
+    }
+  }
+}

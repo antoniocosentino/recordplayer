@@ -1,0 +1,22 @@
+# Private album content (keep locally; never commit)
+/assets/
+/content/
+*.mp3
+*.wav
+*.flac
+*.m4a
+*.ogg
+
+# Server-specific settings and temporary diagnostics
+/backend/settings.php
+/backend/check.php
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Build artifacts include deployment configuration
+/dist/
+/node_modules/
+.DS_Store
